@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "66111693193",
+    "project_id": "irishdriving-c8ae0",
+    "storage_bucket": "irishdriving-c8ae0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66111693193:android:49c568c05675bb2a3a0158",
+        "android_client_info": {
+          "package_name": "com.example.irish_driving_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66111693193-u7con1skp187peatkbsm3sgg6mlm3fda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu9ZXmJkR-W3eWFK64Y9dYyqjPa_ugkxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66111693193-u7con1skp187peatkbsm3sgg6mlm3fda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66111693193:android:ecfbdb024154822d3a0158",
+        "android_client_info": {
+          "package_name": "com.example.irrish_driving"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66111693193-scbvptidr67nfna3hes5vlg8gp3j7a57.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.irrish_driving",
+            "certificate_hash": "d032a8260e33ba4be50791313c00d31bbdfe96a4"
+          }
+        },
+        {
+          "client_id": "66111693193-u7con1skp187peatkbsm3sgg6mlm3fda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu9ZXmJkR-W3eWFK64Y9dYyqjPa_ugkxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66111693193-u7con1skp187peatkbsm3sgg6mlm3fda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
