@@ -18,16 +18,19 @@ class TextFormInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inputBorder =
-        OutlineInputBorder(borderSide: Divider.createBorderSide(context));
+    final inputBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      borderSide: BorderSide(width: 1, color: Color(0xffEBEBEB)), //<-- SEE HERE
+    );
     return TextField(
       decoration: InputDecoration(
         suffixIcon: preIcon,
-        fillColor: Colors.white,
+        fillColor: Color(0xffD9D9D9).withOpacity(.5),
         hintText: hintText,
         border: inputBorder,
         focusedBorder: inputBorder,
         enabledBorder: inputBorder,
+        disabledBorder: inputBorder,
         filled: true,
         contentPadding: EdgeInsets.all(8),
       ),
