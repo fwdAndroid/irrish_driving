@@ -1,7 +1,10 @@
 import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:irrish_driving/screens/main_screen.dart';
+import 'package:irrish_driving/services/db.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 import 'package:irrish_driving/widgets/textfield.dart';
 import 'package:irrish_driving/widgets/utils.dart';
@@ -243,40 +246,35 @@ class _GoogleProfileScreenState extends State<GoogleProfileScreen> {
 
   void profile() async {
     if (nameController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Name is  Required")));
+      showSnakBar("Name is  Required", context);
     } else if (dateController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Dob is Required")));
+      showSnakBar("Date of Birth is  Required", context);
     } else if (phoneController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Phone Number  is Required")));
+      showSnakBar("Phone Number is  Required", context);
     } else if (nameController.text.isEmpty &&
         phoneController.text.isEmpty &&
         dateController.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("All fields is Required")));
+      showSnakBar("All Fields  is  Required", context);
     } else {
       setState(() {
         isLoading = true;
       });
-      // await FirebaseFirestore.instance
-      //     .collection("users")
-      //     .doc(FirebaseAuth.instance.currentUser!.uid)
-      //     .update({
-      //   "name": nameController.text,
-      //   "phone": phoneController.text,
-      //   "dob": dateController.text,
-      //   "gender": art,
-      // });
+      String res = await DatabaseMethods().googleProfile(
+          email: FirebaseAuth.instance.currentUser!.email!,
+          dob: dateController.text,
+          phoneNumber: phoneController.text,
+          username: nameController.text,
+          file: _image!);
 
       setState(() {
         isLoading = false;
       });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Profile Creation complete")));
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      if (res != 'success') {
+        showSnakBar(res, context);
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      }
     }
   }
 }

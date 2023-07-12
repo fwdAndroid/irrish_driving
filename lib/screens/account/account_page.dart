@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/screens/status/checkstatus.dart';
+import 'package:irrish_driving/services/auth_service.dart';
 import 'package:irrish_driving/widgets/buttons.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 
@@ -47,10 +49,12 @@ class _AccountPageState extends State<AccountPage> {
             child: Center(
               child: AuthButton(
                 onPressed: () async {
-                  // await AuthServices().signInWithGoogle().then((value) => {
-                  //       Navigator.pushReplacement(context,
-                  //           MaterialPageRoute(builder: (builder) => CheckStatus()))
-                  //     });
+                  await AuthServices().signInWithGoogle().then((value) => {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => CheckStatus()))
+                      });
                 },
                 title: "Log In With Google",
                 image: "assets/googl.png",
