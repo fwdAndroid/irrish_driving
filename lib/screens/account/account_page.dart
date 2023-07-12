@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/screens/account/phone/continue_phone.dart';
 import 'package:irrish_driving/screens/status/checkstatus.dart';
 import 'package:irrish_driving/services/auth_service.dart';
 import 'package:irrish_driving/widgets/buttons.dart';
@@ -63,10 +64,10 @@ class _AccountPageState extends State<AccountPage> {
           ),
           AuthButton(
             onPressed: () async {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (builder) => const ContinuePhone()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (builder) => const ContinuePhone()));
             },
             title: "Log In With Phone Number",
             image: "assets/imgGgphone.png",
