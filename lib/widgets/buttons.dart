@@ -85,3 +85,36 @@ class JoinButton extends StatelessWidget {
     );
   }
 }
+
+//Contianer Button
+class CtButton extends StatelessWidget {
+  final Function()? onPressed;
+  final String? title;
+  final Widget? circular;
+  const CtButton({Key? key, this.onPressed, this.title, this.circular})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          fixedSize: Size(300, 60),
+          backgroundColor: ctcolor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(1.0),
+          ),
+        ),
+        onPressed: onPressed ?? () {},
+        child: Text(
+          "$title",
+          style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+              fontFamily: "ProximaNova"),
+        ),
+      ),
+    );
+  }
+}
