@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/screens/main_screen.dart';
 import 'package:irrish_driving/screens/profile/google_profile.dart';
 import 'package:irrish_driving/services/auth_service.dart';
 
@@ -36,8 +37,8 @@ class _CheckStatusState extends State<CheckStatus> {
     final bool doesDocExist = doc.exists;
 
     if (doesDocExist) {
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (builder) => MainScreen()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainScreen()));
     } else {
       AuthServices().emailGoogle().then((value) => {
             Navigator.push(
