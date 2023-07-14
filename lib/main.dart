@@ -1,16 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:irrish_driving/screens/splash/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
-    await InAppWebViewController.getDefaultUserAgent();
-  }
 
   runApp(
     MyApp(),

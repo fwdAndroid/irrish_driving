@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/widgets/mywidget.dart';
 import 'package:irrish_driving/widgets/buttons.dart';
 import 'package:irrish_driving/widgets/colors.dart';
-import 'package:irrish_driving/widgets/webpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,15 +69,7 @@ class _HomePageState extends State<HomePage> {
             height: 15,
           ),
           CtButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (builder) => MyWidget(
-                            url: "https://skismi.com/tarot-card-results-trial/",
-                            title: "Contact Us",
-                          )));
-            },
+            onPressed: () {},
             title: "Contact Us",
           ),
         ],
