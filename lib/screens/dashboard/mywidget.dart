@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:irrish_driving/screens/booking/booking.dart';
-import 'package:irrish_driving/widgets/buttons.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
-class RouteWidget extends StatefulWidget {
+class MyWidget extends StatefulWidget {
   final String title;
   final url;
-  const RouteWidget({
-    super.key,
-    required this.title,
-    required this.url,
-  });
+  const MyWidget({super.key, required this.title, required this.url});
 
   @override
-  State<RouteWidget> createState() => _RouteWidgetState();
+  State<MyWidget> createState() => _MyWidgetState();
 }
 
-class _RouteWidgetState extends State<RouteWidget> {
+class _MyWidgetState extends State<MyWidget> {
   late final WebViewController _controller;
 
   @override
@@ -105,22 +99,7 @@ Page resource error:
         centerTitle: true,
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 630, child: WebViewWidget(controller: _controller)),
-          CtButton(
-            title: "Continue",
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (builder) => Booking(
-                            centerName: widget.title,
-                          )));
-            },
-          )
-        ],
-      ),
+      body: WebViewWidget(controller: _controller),
     );
   }
 }
