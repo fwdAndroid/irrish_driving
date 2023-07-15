@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 import 'package:irrish_driving/widgets/mywidget.dart';
+import 'package:irrish_driving/widgets/utils.dart';
 import 'package:pay/pay.dart';
+import 'package:uuid/uuid.dart';
 
 class ConfirmBookingPage extends StatefulWidget {
   final centerName;
@@ -24,8 +26,7 @@ class ConfirmBookingPage extends StatefulWidget {
 }
 
 class _ConfirmBookingPageState extends State<ConfirmBookingPage> {
-  Pay payClient = Pay.withAssets(['gpay.json']);
-
+  bool isloading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,41 +99,63 @@ class _ConfirmBookingPageState extends State<ConfirmBookingPage> {
                   subtitle: Text(widget.bookingdate),
                 ),
                 const Divider(),
+                // Center(
+                //   child: GooglePayButton(
+                //     paymentConfigurationAsset: 'gpay.json',
+                //     paymentItems: const [
+                //       PaymentItem(
+                //         label: 'Total',
+                //         amount: '10.00',
+                //         status: PaymentItemStatus.final_price,
+                //       )
+                //     ],
+                //     type: GooglePayButtonType.pay,
+                //     margin: const EdgeInsets.only(top: 15.0),
+                //     onPaymentResult: (result) {
+                //       print(result.toString());
+                //     },
+                //     loadingIndicator: const Center(
+                //       child: CircularProgressIndicator(),
+                //     ),
+                //   ),
+                // ),
                 Center(
-                  child: GooglePayButton(
-                    paymentConfigurationAsset: 'gpay.json',
-                    paymentItems: const [
-                      PaymentItem(
-                        label: 'Total',
-                        amount: '10.00',
-                        status: PaymentItemStatus.final_price,
-                      )
-                    ],
-                    type: GooglePayButtonType.pay,
-                    margin: const EdgeInsets.only(top: 15.0),
-                    onPaymentResult: (result) {
-                      print(result.toString());
-                    },
-                    loadingIndicator: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                ),
-
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       const Text(
-                //         "100\$",
-                //         style: TextStyle(
-                //             color: colorBlack,
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 22),
-                //       ),
-
-                // )
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: colorBlack,
+                          fixedSize: Size(260, 60)),
+                      onPressed: () async {
+                        setState(() {
+                          isloading = true;
+                        });
+                        var uuid = Uuid().v4();
+                        await FirebaseFirestore.instance
+                            .collection("appointment")
+                            .doc(uuid)
+                            .set({
+                          "name": document['name'],
+                          "date": widget.bookingdate,
+                          "amount": 14,
+                          "weblink": widget.weburl,
+                          "centerName": widget.centerName,
+                          "centerLocation": widget.locationName,
+                          "userid": FirebaseAuth.instance.currentUser!.uid,
+                          "uuid": uuid,
+                          "payment": "paid",
+                          "status": "start"
+                        });
+                        setState(() {
+                          isloading = false;
+                        });
+                        showSnakBar("Appointment Done", context);
+                      },
+                      child: isloading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                              "Book Appointment",
+                              style: TextStyle(color: colorWhite),
+                            )),
+                )
               ],
             );
           }),
