@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/screens/main_screen.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 import 'package:irrish_driving/widgets/mywidget.dart';
 import 'package:irrish_driving/widgets/utils.dart';
@@ -148,6 +149,10 @@ class _ConfirmBookingPageState extends State<ConfirmBookingPage> {
                           isloading = false;
                         });
                         showSnakBar("Appointment Done", context);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => MainScreen()));
                       },
                       child: isloading
                           ? const CircularProgressIndicator()
