@@ -9,10 +9,12 @@ class Booking extends StatefulWidget {
   final centerName;
   final locationName;
   final uid;
+  final weburl;
   const Booking(
       {super.key,
       required this.centerName,
       required this.locationName,
+      required this.weburl,
       required this.uid});
 
   @override
@@ -40,10 +42,12 @@ class _BookingState extends State<Booking> {
             title: const Text("Center Name"),
             subtitle: Text(widget.centerName),
           ),
+          const Divider(),
           ListTile(
             title: const Text("Center Location"),
             subtitle: Text(widget.locationName),
           ),
+          const Divider(),
           Container(
               margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
               child: TextFormField(
@@ -85,7 +89,13 @@ class _BookingState extends State<Booking> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (builder) => ConfirmBookingPage()));
+                          builder: (builder) => ConfirmBookingPage(
+                                weburl: widget.weburl,
+                                centerName: widget.centerName,
+                                locationName: widget.locationName,
+                                uid: widget.uid,
+                                bookingdate: dateController.text,
+                              )));
                 }
               },
             ),

@@ -120,6 +120,7 @@ Page resource error:
                       builder: (builder) => Booking(
                             centerName: widget.title,
                             uid: widget.uid,
+                            weburl: widget.url,
                             locationName: widget.centerlocation,
                           )));
             },
