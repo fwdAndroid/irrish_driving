@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 import 'package:irrish_driving/widgets/mywidget.dart';
+import 'package:pay/pay.dart';
 
 class ConfirmBookingPage extends StatefulWidget {
   final centerName;
@@ -23,6 +24,8 @@ class ConfirmBookingPage extends StatefulWidget {
 }
 
 class _ConfirmBookingPageState extends State<ConfirmBookingPage> {
+  Pay payClient = Pay.withAssets(['gpay.json']);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,24 +98,41 @@ class _ConfirmBookingPageState extends State<ConfirmBookingPage> {
                   subtitle: Text(widget.bookingdate),
                 ),
                 const Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "100\$",
-                        style: TextStyle(
-                            color: colorBlack,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22),
-                      ),
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("Book Appointment"))
+                Center(
+                  child: GooglePayButton(
+                    paymentConfigurationAsset: 'gpay.json',
+                    paymentItems: const [
+                      PaymentItem(
+                        label: 'Total',
+                        amount: '10.00',
+                        status: PaymentItemStatus.final_price,
+                      )
                     ],
+                    type: GooglePayButtonType.pay,
+                    margin: const EdgeInsets.only(top: 15.0),
+                    onPaymentResult: (result) {
+                      print(result.toString());
+                    },
+                    loadingIndicator: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
-                )
+                ),
+
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       const Text(
+                //         "100\$",
+                //         style: TextStyle(
+                //             color: colorBlack,
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 22),
+                //       ),
+
+                // )
               ],
             );
           }),
