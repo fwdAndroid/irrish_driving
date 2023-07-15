@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:irrish_driving/screens/dashboard/booking_page.dart';
 import 'package:irrish_driving/screens/dashboard/home_page.dart';
 import 'package:irrish_driving/screens/dashboard/my_profile.dart';
-import 'package:irrish_driving/screens/dashboard/order_page.dart';
 
 class MainScreen extends StatefulWidget {
   // MainScreen ({Key key}) : super(key: key);
@@ -84,13 +83,13 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                 ),
               ),
-              //Chat
+
+              //Profile
               MaterialButton(
                 minWidth: 40,
                 onPressed: () {
                   setState(() {
-                    currentScreen = const OrderPage();
-
+                    currentScreen = const MyProfile();
                     currentTab = 2;
                   });
                 },
@@ -98,26 +97,7 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Image.asset(
-                      currentTab == 2 ? 'assets/chats.png' : 'assets/chat1.png',
-                      height: 20,
-                    )
-                  ],
-                ),
-              ),
-              //Profile
-              MaterialButton(
-                minWidth: 40,
-                onPressed: () {
-                  setState(() {
-                    currentScreen = const MyProfile();
-                    currentTab = 3;
-                  });
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      currentTab == 3
+                      currentTab == 2
                           ? 'assets/profilecolor.png'
                           : 'assets/person.png',
                       height: 20,
