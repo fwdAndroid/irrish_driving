@@ -118,3 +118,36 @@ class CtButton extends StatelessWidget {
     );
   }
 }
+
+//Round Button
+class RoundButton extends StatelessWidget {
+  final Function()? onPressed;
+  final String? title;
+  final Widget? circular;
+  const RoundButton({Key? key, this.onPressed, this.title, this.circular})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          fixedSize: Size(300, 60),
+          backgroundColor: ctcolor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14.0),
+          ),
+        ),
+        onPressed: onPressed ?? () {},
+        child: Text(
+          "$title",
+          style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+              fontFamily: "ProximaNova"),
+        ),
+      ),
+    );
+  }
+}

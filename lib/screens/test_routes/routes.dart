@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 import 'package:irrish_driving/widgets/route_widget.dart';
@@ -104,6 +105,10 @@ class _TestRoutesState extends State<TestRoutes> {
                                             MaterialPageRoute(
                                                 builder: (builder) => RouteWidget(
                                                     title: data['centerName'],
+                                                    centerlocation:
+                                                        data['testLocation'],
+                                                    uid: FirebaseAuth.instance
+                                                        .currentUser!.uid,
                                                     url:
                                                         "https://www.google.com/maps/d/viewer?mid=1kmDFwaurXEMn2MhsOBnuzTsEnPEk5kBg&ll=53.396365484023015%2C-6.397051399999998&z=14")));
                                       },

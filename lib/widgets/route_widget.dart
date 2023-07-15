@@ -9,11 +9,14 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 class RouteWidget extends StatefulWidget {
   final String title;
   final url;
-  const RouteWidget({
-    super.key,
-    required this.title,
-    required this.url,
-  });
+  final uid;
+  final centerlocation;
+  const RouteWidget(
+      {super.key,
+      required this.title,
+      required this.url,
+      required this.uid,
+      required this.centerlocation});
 
   @override
   State<RouteWidget> createState() => _RouteWidgetState();
@@ -116,6 +119,8 @@ Page resource error:
                   MaterialPageRoute(
                       builder: (builder) => Booking(
                             centerName: widget.title,
+                            uid: widget.uid,
+                            locationName: widget.centerlocation,
                           )));
             },
           )
