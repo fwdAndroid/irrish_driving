@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/screens/contact/contact_us.dart';
 import 'package:irrish_driving/screens/test_routes/routes.dart';
 import 'package:irrish_driving/widgets/mywidget.dart';
 import 'package:irrish_driving/widgets/buttons.dart';
@@ -73,7 +74,10 @@ class _HomePageState extends State<HomePage> {
             height: 15,
           ),
           CtButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => ContactUs()));
+            },
             title: "Contact Us",
           ),
         ],

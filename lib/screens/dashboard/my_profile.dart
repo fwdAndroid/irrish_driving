@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:irrish_driving/screens/account/account_page.dart';
+import 'package:irrish_driving/screens/contact/contact_us.dart';
 import 'package:irrish_driving/widgets/buttons.dart';
 import 'package:irrish_driving/widgets/colors.dart';
 import 'package:irrish_driving/widgets/dialog.dart';
@@ -52,8 +53,8 @@ class _MyProfileState extends State<MyProfile> {
           ),
           CtButton(
             onPressed: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (builder) => TestRoutes()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => ContactUs()));
             },
             title: "Contact Us",
           ),
