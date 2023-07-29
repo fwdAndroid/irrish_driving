@@ -46,6 +46,11 @@ dependencies:
   uuid: ^3.0.7
   webview_flutter: ^4.2.2
   flutter_inappwebview: ^6.0.0-beta.24+1
+  flutter_google_places_hoc081098: ^1.2.0
+  geocoding: ^2.1.0
+  geolocator: ^9.0.2
+  google_maps_flutter: ^2.4.0
+  place_picker: ^0.10.0
   pay: ^1.1.0
 dev_dependencies:
   flutter_lints: ^2.0.0

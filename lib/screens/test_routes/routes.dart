@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:irrish_driving/screens/test_routes/google_map_routes.dart';
 import 'package:irrish_driving/widgets/colors.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class TestRoutes extends StatefulWidget {
   const TestRoutes({super.key});
@@ -98,17 +100,16 @@ class _TestRoutesState extends State<TestRoutes> {
                                   ),
                                   trailing: TextButton(
                                       onPressed: () async {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (builder) => RouteWidget(
-                                        //             title: data['centerName'],
-                                        //             centerlocation:
-                                        //                 data['testLocation'],
-                                        //             uid: FirebaseAuth.instance
-                                        //                 .currentUser!.uid,
-                                        //             url:
-                                        //                 "https://www.google.com/maps/d/viewer?mid=1kmDFwaurXEMn2MhsOBnuzTsEnPEk5kBg&ll=53.396365484023015%2C-6.397051399999998&z=14")));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    MapWithRoutes([
+                                                      LatLng(37.7749,
+                                                          -122.4194), // Example GeoPoint 1 (San Francisco, CA)
+                                                      LatLng(34.0522,
+                                                          -118.2437), // Example GeoPoint 2 (Los Angeles, CA)
+                                                    ])));
                                       },
                                       child: Text("View Map")),
                                 ),
