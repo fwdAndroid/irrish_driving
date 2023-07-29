@@ -45,8 +45,8 @@ dependencies:
   pinput: ^2.2.31
   uuid: ^3.0.7
   webview_flutter: ^4.2.2
+  flutter_inappwebview: ^6.0.0-beta.24+1
   pay: ^1.1.0
-
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

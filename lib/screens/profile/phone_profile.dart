@@ -111,54 +111,6 @@ class _PhoneProfileScreenState extends State<PhoneProfileScreen> {
                     ),
                   )),
               Container(
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: DropdownButtonFormField<String>(
-                  hint: const Text("Select Gender"),
-                  focusColor: Colors.black,
-                  decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.black),
-                    filled: true,
-                    fillColor: const Color(0xffD9D9D9).withOpacity(.5),
-                    labelStyle: const TextStyle(color: Colors.black),
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color(0xffEBEBEB)), //<-- SEE HERE
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color(0xffEBEBEB)), //<-- SEE HERE
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color(0xffEBEBEB)), //<-- SEE HERE
-                    ),
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                  value: art,
-                  isDense: true,
-                  isExpanded: true,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.black),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      art = value!;
-                    });
-                  },
-                  items: dropdownItemList
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ),
-              Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: Center(
                   child: ElevatedButton(
