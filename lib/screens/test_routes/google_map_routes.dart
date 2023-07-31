@@ -8,79 +8,52 @@ class MapWithRoutes extends StatefulWidget {
 }
 
 class _MapWithRoutesState extends State<MapWithRoutes> {
-  late GoogleMapController mapController;
-  List<LatLng> routePoints = []; // List to store GeoPoints for the route
+  GoogleMapController? mapController;
+  List<LatLng> _points = []; // List to store GeoPoints for the route
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Map with Routes')),
       body: GoogleMap(
+        myLocationEnabled: true,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(0, 0), // Initial camera position
+          zoom: 10.0, // Initial zoom level
+        ),
         onMapCreated: (controller) {
           mapController = controller;
-          _fetchRouteFromFirestore(); // Fetch GeoPoints from Firestore
+          _getGeoPoints(); // Fetch Firestore Geopoints and draw lines on map
         },
-        initialCameraPosition: CameraPosition(
-          target: LatLng(
-              0, 0), // Set the initial camera position to a default location
-          zoom: 12.0,
-        ),
-        polylines: _createPolylines(routePoints),
+        polylines: {
+          // Add the polyline to the map
+          Polyline(
+            polylineId: PolylineId('route'),
+            color: Colors.blue,
+            width: 3,
+            points: _points,
+          ),
+        },
       ),
     );
   }
 
-  void _fetchRouteFromFirestore() {
-    // Replace 'YOUR_FIRESTORE_COLLECTION_NAME' with the actual collection name
-    FirebaseFirestore.instance
-        .collection('centers')
-        .get()
-        .then((querySnapshot) {
-      List<LatLng> points = [];
-      querySnapshot.docs.forEach((doc) {
-        GeoPoint geoPoint = doc[
-            'geopoint']; // Assuming you store GeoPoints under the 'location' field
-        points.add(LatLng(geoPoint.latitude, geoPoint.longitude));
-      });
+  void _getGeoPoints() {
+    // Replace 'your_firestore_collection' with your actual Firestore collection name
+    FirebaseFirestore.instance.collection('centers').get().then(
+      (QuerySnapshot querySnapshot) {
+        List<LatLng> points = [];
+        querySnapshot.docs.forEach((doc) {
+          GeoPoint geoPoint = doc[
+              'geopoint']; // Assuming the field in Firestore is named 'location'
+          points.add(LatLng(geoPoint.latitude, geoPoint.longitude));
+        });
 
-      setState(() {
-        routePoints = points;
-        if (routePoints.isNotEmpty) {
-          _moveCameraToRoute();
-        }
-      });
-    });
-  }
-
-  void _moveCameraToRoute() {
-    // Adjust camera position to fit the entire route
-    LatLngBounds bounds = LatLngBounds(
-      southwest: routePoints.reduce((value, element) => LatLng(
-          value.latitude < element.latitude ? value.latitude : element.latitude,
-          value.longitude < element.longitude
-              ? value.longitude
-              : element.longitude)),
-      northeast: routePoints.reduce((value, element) => LatLng(
-          value.latitude > element.latitude ? value.latitude : element.latitude,
-          value.longitude > element.longitude
-              ? value.longitude
-              : element.longitude)),
+        setState(() {
+          _points =
+              points; // Update the points list to trigger a redraw of the map with lines
+        });
+      },
     );
-
-    mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
-  }
-
-  Set<Polyline> _createPolylines(List<LatLng> points) {
-    List<LatLng> polylinePoints =
-        List.from(points); // Copy the list of GeoPoints
-
-    return <Polyline>[
-      Polyline(
-        polylineId: PolylineId('route'),
-        color: Colors.blue,
-        width: 3,
-        points: polylinePoints,
-      ),
-    ].toSet();
   }
 }
