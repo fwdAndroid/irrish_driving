@@ -104,12 +104,7 @@ class _TestRoutesState extends State<TestRoutes> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (builder) =>
-                                                    MapWithRoutes([
-                                                      LatLng(37.7749,
-                                                          -122.4194), // Example GeoPoint 1 (San Francisco, CA)
-                                                      LatLng(34.0522,
-                                                          -118.2437), // Example GeoPoint 2 (Los Angeles, CA)
-                                                    ])));
+                                                    MapWithRoutes()));
                                       },
                                       child: Text("View Map")),
                                 ),
