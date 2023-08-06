@@ -27,9 +27,9 @@ class PermissionUtils {
 
     // Location service and permission are granted, get the user's location
     _locationData = await _location.getLocation();
+
     // Now you can use _locationData.latitude and _locationData.longitude to access user's location
 
     // Do additional tasks, like enabling the MyLocation layer on a map, etc.
   }
-  //Get
 }

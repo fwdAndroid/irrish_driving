@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:irrish_driving/utils/permission.utils.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapWithRoutes extends StatefulWidget {
   @override
@@ -11,13 +12,16 @@ class MapWithRoutes extends StatefulWidget {
 class _MapWithRoutesState extends State<MapWithRoutes> {
   GoogleMapController? mapController;
   List<LatLng> _points = []; // List to store GeoPoints for the route
+  LatLng _currentLocation = LatLng(0.0, 0.0);
 
   @override
   void initState() {
     super.initState();
+
     PermissionUtils().checkLocationPermissions();
   }
 
+  Position? position;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +31,11 @@ class _MapWithRoutesState extends State<MapWithRoutes> {
         child: Icon(Icons.directions),
       ),
       body: GoogleMap(
+        myLocationEnabled: true,
+        indoorViewEnabled: true,
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
-          target: LatLng(0, 0), // Initial camera position
+          target: _currentLocation,
           zoom: 10.0, // Initial zoom level
         ),
         onMapCreated: (controller) {
@@ -42,6 +48,8 @@ class _MapWithRoutesState extends State<MapWithRoutes> {
             polylineId: PolylineId('route'),
             color: Colors.blue,
             width: 3,
+            endCap: Cap.buttCap,
+            startCap: Cap.squareCap,
             points: _points,
           ),
         },
