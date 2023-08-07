@@ -13,15 +13,18 @@ class _MapWithRoutesState extends State<MapWithRoutes> {
   GoogleMapController? mapController;
   List<LatLng> _points = []; // List to store GeoPoints for the route
   LatLng _currentLocation = LatLng(0.0, 0.0);
+  CameraPosition cameraPosition =
+      const CameraPosition(target: LatLng(51.1657, 10.4515));
+  bool _isLoading = false;
+  List<Marker> _markers = [];
 
   @override
   void initState() {
     super.initState();
-
+    init();
     PermissionUtils().checkLocationPermissions();
   }
 
-  Position? position;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +39,12 @@ class _MapWithRoutesState extends State<MapWithRoutes> {
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
           target: _currentLocation,
-          zoom: 10.0, // Initial zoom level
+          zoom: 5.0, // Initial zoom level
         ),
+        markers: Set<Marker>.of(_markers), // Display the markers on the map
+        onCameraMove: (CameraPosition cameraPositiona) {
+          cameraPosition = cameraPositiona;
+        },
         onMapCreated: (controller) {
           mapController = controller;
           _getGeoPoints(); // Fetch Firestore Geopoints and draw lines on map
@@ -74,5 +81,34 @@ class _MapWithRoutesState extends State<MapWithRoutes> {
         }
       },
     );
+  }
+
+  init() async {
+    await getUserCurrentLocation().then((value) async {
+      print("value.latitude:${value.latitude}");
+
+      CameraPosition cameraPosition = CameraPosition(
+          target: LatLng(value.latitude, value.longitude), zoom: 14);
+
+      mapController!
+          .animateCamera(CameraUpdate.newCameraPosition(cameraPosition))
+          .then((value) {
+        print('animated');
+      });
+      setState(() {});
+    });
+  }
+
+  Future<Position> getUserCurrentLocation() async {
+    setState(() {
+      _isLoading = true;
+    });
+    await Geolocator.requestPermission().then((value) async {
+      print(
+          'getUserCurrentLocation:$value:${await Geolocator.getCurrentPosition()}');
+    }).onError((error, stackTrace) {
+      print("error" + error.toString());
+    });
+    return await Geolocator.getCurrentPosition();
   }
 }

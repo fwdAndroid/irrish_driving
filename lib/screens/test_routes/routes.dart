@@ -84,19 +84,19 @@ class _TestRoutesState extends State<TestRoutes> {
                                       Text(data['centerName']),
                                     ],
                                   ),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        "Test Center Location:",
-                                        style: TextStyle(
-                                            color: colorBlack,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(data['testLocation']),
-                                    ],
-                                  ),
+                                  // subtitle: Column(
+                                  //   crossAxisAlignment:
+                                  //       CrossAxisAlignment.start,
+                                  //   children: [
+                                  //     const Text(
+                                  //       "Test Center Location:",
+                                  //       style: TextStyle(
+                                  //           color: colorBlack,
+                                  //           fontWeight: FontWeight.bold),
+                                  //     ),
+                                  //     Text(data['testLocation']),
+                                  //   ],
+                                  // ),
                                   trailing: TextButton(
                                       onPressed: () async {
                                         Navigator.push(
