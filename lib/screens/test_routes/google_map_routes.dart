@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:irrish_driving/utils/permission.utils.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:irrish_driving/widgets/mywidget.dart';
 
 class MapWithRoutes extends StatefulWidget {
   @override
@@ -24,13 +25,22 @@ class _MapWithRoutesState extends State<MapWithRoutes> {
     init();
     PermissionUtils().checkLocationPermissions();
   }
+  // https://www.google.com/maps
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Test Centers Routes')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (builder) => MyWidget(
+                        title: "Navigation",
+                        url: " https://www.google.com/maps",
+                      )));
+        },
         child: Icon(Icons.directions),
       ),
       body: GoogleMap(
