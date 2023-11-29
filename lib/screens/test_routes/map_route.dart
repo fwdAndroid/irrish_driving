@@ -5,21 +5,23 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyWidget extends StatefulWidget {
+class MapWidget extends StatefulWidget {
   final String title;
   final url;
-
-  MyWidget({
-    super.key,
-    required this.title,
-    required this.url,
-  });
+  double latitude;
+  double longitude;
+  MapWidget(
+      {super.key,
+      required this.title,
+      required this.url,
+      required this.latitude,
+      required this.longitude});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<MapWidget> createState() => _MapWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _MapWidgetState extends State<MapWidget> {
   late final WebViewController _controller;
 
   @override
@@ -101,11 +103,26 @@ Page resource error:
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          openGoogleMapsDirections(widget.latitude, widget.longitude);
+        },
+        child: Icon(Icons.directions),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.title),
       ),
       body: WebViewWidget(controller: _controller),
     );
+  }
+
+  Future<void> openGoogleMapsDirections(
+      double latitude, double longitude) async {
+    var googleMapsUrl =
+        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+    if (!await launchUrl(Uri.parse(googleMapsUrl))) {
+      throw Exception('Could not launch $googleMapsUrl');
+    }
   }
 }

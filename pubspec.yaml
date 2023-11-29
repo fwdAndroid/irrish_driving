@@ -50,11 +50,11 @@ dependencies:
   intl: ^0.18.0
   intl_phone_field: ^3.2.0
   location: ^5.0.2+1
-  pay: ^1.1.0
   permission_handler: ^10.4.3
   phone_form_field: ^3.0.1
   pinput: ^2.2.31
   place_picker: ^0.10.0
+  url_launcher: ^6.2.1
   uuid: ^3.0.7
   webview_flutter: ^4.2.2
 dev_dependencies:
@@ -75,7 +75,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/gpay.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

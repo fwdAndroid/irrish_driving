@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:irrish_driving/screens/booking/booking.dart';
 import 'package:irrish_driving/widgets/buttons.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -113,17 +112,7 @@ Page resource error:
           SizedBox(height: 630, child: WebViewWidget(controller: _controller)),
           CtButton(
             title: "Continue",
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (builder) => Booking(
-                            centerName: widget.title,
-                            uid: widget.uid,
-                            weburl: widget.url,
-                            locationName: widget.centerlocation,
-                          )));
-            },
+            onPressed: () {},
           )
         ],
       ),
